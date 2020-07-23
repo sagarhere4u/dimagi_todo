@@ -16,6 +16,15 @@
       name: postgressql
       state: running
 
+  - name: uwsgi install
+    pip:
+      name: uwsgi
+
+  - name: copy uwsgi ini
+    copy:
+      src: "/home/devops/todo_with_shell/todo.ini"
+      dest: "/home/devops/todo/todo.ini"
+
   - name: copy deploy
     copy:
       src: "/home/devops/todo_with_shell/deploy.sh"
@@ -27,6 +36,11 @@
     ufw:
       rule: allow
       port: '5000'
+
+  - name: copy service startup file
+    copy:
+      src: "/home/devops/todo_with_shell/todo.service"
+      dest: "/et/systemd/system/todo.service"
 
   handlers:
   - name: run script
