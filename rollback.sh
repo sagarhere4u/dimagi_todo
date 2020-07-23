@@ -9,9 +9,8 @@ cv=`cat /home/devops/todo_with_shell/version | tail -"$var" | head -1`
 echo $cv
 git reset --hard $cv
 echo "$cv" >> /home/devops/todo_with_shell/version
-git pull
+#git pull
 . env/bin/activate
-sleep 60
 pip install -U -r requirements.txt
 flask db upgrade
 pkill -u devops flask

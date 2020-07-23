@@ -16,7 +16,6 @@ else
    git checkout master
    git pull
    . env/bin/activate
-   sleep 60
    pip install -U -r requirements.txt
    flask db upgrade
    pkill -u devops flask
