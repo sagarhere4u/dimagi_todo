@@ -1,0 +1,15 @@
+[Unit]
+Description=To Do Server
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/home/devops/todo
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin"
+ExecStart=uwsgi --ini todo.ini
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

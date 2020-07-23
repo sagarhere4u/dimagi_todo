@@ -1,0 +1,33 @@
+---
+- hosts: multiflasktodoappgroup
+  tasks:
+  - name: install python
+    package:
+      name: python
+      state: latest
+
+  - name: install postgres
+    package:
+      name: postgressql
+      state: latest
+
+  - name: start postgress
+    service:
+      name: postgressql
+      state: running
+
+  - name: copy deploy
+    copy:
+      src: "/home/devops/todo_with_shell/deploy.sh"
+      dest: "/home/devops/todo_with_shell/deploy.sh"
+    notify:
+      - run script
+
+  - name: Allow 5000 
+    ufw:
+      rule: allow
+      port: '5000'
+
+  handlers:
+  - name: run script
+    shell: "/home/devops/todo_with_shell/deploy.sh"
